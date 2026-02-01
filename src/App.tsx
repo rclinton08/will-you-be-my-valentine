@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
+import { useRef } from "react";
 
 export default function Page() {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
   const yesButtonSize = noCount * 20 + 16;
+  const lastIndexRef = useRef<number | null>(null);
 
   const handleNoClick = () => {
     setNoCount(noCount + 1);
@@ -12,33 +14,44 @@ export default function Page() {
 
   const getNoButtonText = () => {
     const phrases = [
-      "No",
       "Are you sure?",
       "What if I asked really nicely?",
       "Pretty please",
-      "With a chocolate rice cake on top",
-      "What about a matcha frostie",
-      "PLEASE POOKIE",
+      "Do you want a 'ferrero rocher'???",
+      "What about biryaniii",
+      "PLEASE MUNNUUUU",
       "But :*(",
       "I am going to die",
       "Yep im dead",
-      "ok ur talking to nathan's ghost",
-      "please babe",
+      "ok ur talking to bubu's ghost",
+      "please kukiiiii",
       ":((((",
       "PRETTY PLEASE",
-      "Estoy muerto",
+      ":* piggy please :*",
       "No :(",
     ];
 
-    return phrases[Math.min(noCount, phrases.length - 1)];
-  };
+  //   return phrases[Math.min(noCount, phrases.length - 1)];
+  // };
+
+
+    //  loop through randomly
+      let index;
+
+      do {
+        index = Math.floor(Math.random() * phrases.length);
+      } while (index === lastIndexRef.current && phrases.length > 1);
+
+      lastIndexRef.current = index;
+      return phrases[index];
+    };
 
   return (
     <div className="-mt-16 flex h-screen flex-col items-center justify-center">
       {yesPressed ? (
         <>
           <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" />
-          <div className="my-4 text-4xl font-bold">WOOOOOO!!! I love you pookie!! ;))</div>
+          <div className="my-4 text-4xl font-bold">WOOOOOO!!! I love you chonl=kulya!! :* :* ;))</div>
         </>
       ) : (
         <>
